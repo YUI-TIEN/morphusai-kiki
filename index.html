@@ -47,7 +47,8 @@
         }
         /* 區塊間的留白 */
         .section-padding {
-            @apply py-20 sm:py-28 px-6 lg:px-8;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
         }
         /* 導航欄樣式 */
         header {
@@ -143,6 +144,7 @@
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
+
         <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg pb-3">
             <a href="#about" class="block px-6 py-3 text-neutral-600 hover:bg-teal-50 hover:text-teal-700 transition-colors"><span class="nav-english">About Us</span> <span class="nav-chinese text-xs font-chinese">關於我們</span></a>
             <a href="#news" class="block px-6 py-3 text-neutral-600 hover:bg-teal-50 hover:text-teal-700 transition-colors"><span class="nav-english">News</span> <span class="nav-chinese text-xs font-chinese">最新情報</span></a>
@@ -160,20 +162,20 @@
     <section class="bg-white section-padding min-h-[80vh] flex items-center">
         <div class="container mx-auto text-center">
             <div class="scroll-animate">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 mb-6">
-                    Building the <span class="text-teal-700">Future</span> of Intelligence
-                </h1>
-                <p class="text-lg sm:text-xl text-neutral-600 mb-10 max-w-2xl mx-auto font-chinese">
-                    探索 MorphusAI 如何革新您的業務流程與決策，釋放前所未有的潛力。
+                <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 mb-6">
+                    Bridging Technology and Humanity:
                 </p>
-                <a href="#contact" class="btn-soft text-lg">Learn More</a>
+                <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 text-teal-700 mb-6">
+                    AI with Soul
+                </p>
+                <a href="#contact" class="btn-soft text-lg">+ Learn More</a>
             </div>
         </div>
     </section>
 
     <section id="about" class="section-padding bg-stone-50">
         <div class="container mx-auto">
-            <div class="scroll-animate text-center mb-28"> <h2 class="text-3xl sm:text-4xl font-bold text-neutral-800 section-title center">About Us</h2>
+            <div class="scroll-animate text-center mb-28"> <h2 class="sm:text-4xl font-bold text-neutral-800 section-title center">About Us</h2>
                 <p class="text-neutral-500 mt-4 text-lg font-chinese">我們的使命與願景</p>
             </div>
             <div class="scroll-animate max-w-3xl mx-auto text-center text-neutral-600 text-lg leading-relaxed font-chinese">
@@ -333,7 +335,6 @@
             </div>
             <div class="mt-12 border-t border-neutral-300 pt-8 text-center">
                 <p class="text-sm">&copy; 2025 MorphusAI. All rights reserved.</p>
-                <p class="text-xs mt-2 font-chinese">設計風格靈感源自日系簡約美學。一同攜手建造未來的可能性。</p>
             </div>
             </div>
     </footer>
