@@ -129,9 +129,38 @@
             border-radius: 50%;
             will-change: transform;
         }
+        /* ---------- Page loading overlay ---------- */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 100;              /* on top of everything */
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+        }
+        #preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .preloader-logo {
+            width: 64px;   /* bigger icon */
+            height: 64px;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { transform: scale(1);   opacity: 1; }
+            50%      { transform: scale(1.2); opacity: 0.6; }
+        }
     </style>
 </head>
 <body class="bg-white text-neutral-700 leading-relaxed">
+
+    <!-- Page loading spinner -->
+    <div id="preloader" aria-hidden="true">
+        <img src="images/Logo-Icon-Black.svg" alt="MorphusAI Logo icon" class="preloader-logo">
+    </div>
 
     <header class="sticky top-0 z-50 bg-white/90 shadow-sm">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -414,6 +443,7 @@
         // 捲動動畫處理
         const scrollElements = document.querySelectorAll('.scroll-animate');
         let locoScroll;   // will hold the LocomotiveScroll instance
+        let startHeroScramble = null;  // will be assigned later
 
         const elementInView = (el, percentageScroll = 100) => {
             const elementTop = el.getBoundingClientRect().top;
@@ -526,13 +556,12 @@
                 heroLine1.textContent = randomizeText(original1);
                 heroLine2.textContent = randomizeText(original2);
 
-                // Start first line
-                setTimeout(() => {
+                // Defer hero headline animation until pre‑loader has faded out
+                startHeroScramble = () => {
                     scramble(heroLine1, original1);        // uses default frame = 25 ms
-                    // Kick off second line when the first line is about halfway done
                     const delay = Math.ceil((original1.length / 2) * 25); // half the first‑line duration
                     setTimeout(() => scramble(heroLine2, original2), delay);
-                }, 100); // slight initial delay
+                };
             }
         });
         // Re‑calculate LocomotiveScroll height after all assets load and again after a short delay
@@ -540,8 +569,20 @@
             if (locoScroll && typeof locoScroll.update === 'function') {
                 locoScroll.update();
 
-                // Some embeds (e.g., YouTube iframe) report size later; update again after 1 s
-                setTimeout(() => locoScroll.update(), 1000);
+                // Some embeds report size later; update again after 1.2 s
+                setTimeout(() => {
+                    locoScroll.update();
+                    // Fade out page preloader
+                    const preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        // When the fade‑out CSS transition completes, start the HERO scramble
+                        preloader.addEventListener('transitionend', () => {
+                            if (startHeroScramble) startHeroScramble();
+                        }, { once: true });
+
+                        setTimeout(() => preloader.classList.add('fade-out'), 100); // slight delay for smoother transition
+                    }
+                }, 1200);
             }
         });
 
