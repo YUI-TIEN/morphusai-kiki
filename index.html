@@ -40,7 +40,7 @@
         }
         /* 柔和的按鈕風格 */
         .btn-soft {
-            @apply px-8 py-3 bg-teal-600 text-white rounded-lg shadow-sm hover:bg-teal-700 transition-colors duration-300;
+            @apply px-8 py-3 text-teal-700 rounded-lg shadow-sm hover:text-teal-800 transition-colors duration-300;
         }
         .btn-outline-soft {
             @apply px-8 py-3 border border-teal-600 text-teal-700 rounded-lg shadow-sm hover:bg-teal-50 hover:shadow-md transition-all duration-300;
@@ -80,7 +80,7 @@
             @apply bg-white p-6 rounded-lg border border-stone-200 hover:shadow-lg transition-shadow duration-300 flex flex-col;
         }
         .news-card-image-placeholder {
-            @apply aspect-video bg-stone-200 rounded-md mb-4 w-full; 
+            @apply aspect-video rounded-md mb-4 w-full; 
             /* 示意圖/影片的佔位符 */
         }
         .news-card-date {
@@ -93,7 +93,7 @@
             @apply text-sm text-neutral-600 flex-grow; /* flex-grow 讓文字部分佔滿剩餘空間 */
         }
         .news-card-readmore {
-             @apply text-teal-600 hover:text-teal-700 mt-4 inline-block font-medium text-sm; /* 調整 margin-top */
+             @apply text-teal-600 inline-block font-medium text-sm mt-4; /* 間距加大 */
         }
 
         /* Footer 按鈕樣式 (外框) */
@@ -159,16 +159,38 @@
         </div>
     </header>
 
-    <section class="bg-white section-padding min-h-[80vh] flex items-center">
+    <section class="bg-white section-padding min-h-screen flex items-center">
         <div class="container mx-auto text-center">
             <div class="scroll-animate">
-                <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 mb-6">
+                <p id="hero-line1" class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 mb-6">
                     Bridging Technology and Humanity:
                 </p>
-                <p class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 text-teal-700 mb-6">
+                <p id="hero-line2" class="text-4xl sm:text-5xl md:text-6xl font-bold text-neutral-800 text-teal-700 mb-6">
                     AI with Soul
                 </p>
-                <a href="#contact" class="btn-soft text-lg">+ Learn More</a>
+                <a href="#contact" class="btn-soft text-lg hover:text-teal-700 transition-colors">+ Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Intro Video – centered card (larger) -->
+    <section id="story-video" class="section-padding bg-white">
+        <div class="container mx-auto">
+            <div class="scroll-animate max-w-6xl mx-auto bg-white border border-stone-200 rounded-lg shadow-sm overflow-hidden">
+                <div class="p-10 md:p-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-neutral-800 text-center mb-4">Our Vision</h2>
+                    <p class="text-lg font-chinese text-neutral-600 text-center mb-8">我們的第一號虛擬員工 —— 茉茉</p>
+                    <div class="aspect-video">
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/ZOcvIoPLMbg?si=tF3THXAoRA6h5uJ8&rel=0&playsinline=1"
+                            title="MorphusAI Corporate Video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -178,6 +200,12 @@
             <div class="scroll-animate text-center mb-28"> <h2 class="sm:text-4xl font-bold text-neutral-800 section-title center">About Us</h2>
                 <p class="text-neutral-500 mt-4 text-lg font-chinese">我們的使命與願景</p>
             </div>
+        <!-- Company Banner Image -->
+        <div class="scroll-animate max-w-4xl mx-auto mb-16">
+            <img src="images/DSC_6061.jpg"
+                 alt="MorphusAI Team Photo"
+                 class="w-full aspect-video object-cover rounded-lg shadow-lg">
+        </div>
             <div class="scroll-animate max-w-3xl mx-auto text-center text-neutral-600 text-lg leading-relaxed font-chinese">
                 <p>
                     MorphusAI 致力於開發尖端的人工智能解決方案，旨在賦能企業與個人，釋放數據的全部潛力。我們相信，透過創新技術，可以簡化複雜挑戰，創造更智能、更高效的世界。我們的團隊由充滿熱情的AI專家、數據科學家和工程師組成，共同致力於推動AI技術的邊界。
@@ -199,7 +227,7 @@
                         <h3 class="news-card-title font-chinese">MorphusAI 榮獲年度創新技術獎</h3>
                         <p class="news-card-excerpt font-chinese">我們很榮幸地宣布，MorphusAI 在 AI 領域的突破性進展獲得了業界肯定...</p>
                     </div>
-                    <a href="#" class="news-card-readmore">閱讀更多 &rarr;</a>
+                    <a href="#" class="news-card-readmore hover:text-teal-700 transition-colors">閱讀更多 &rarr;</a>
                 </div>
                 <div class="scroll-animate news-card" style="transition-delay: 0.15s;">
                     <div class="news-card-image-placeholder"></div>
@@ -208,7 +236,7 @@
                         <h3 class="news-card-title font-chinese">新一代自然語言處理模型發布</h3>
                         <p class="news-card-excerpt font-chinese">探索我們最新的 NLP 模型，它將如何改變您與數據的互動方式...</p>
                     </div>
-                    <a href="#" class="news-card-readmore">閱讀更多 &rarr;</a>
+                    <a href="#" class="news-card-readmore hover:text-teal-700 transition-colors">閱讀更多 &rarr;</a>
                 </div>
                 <div class="scroll-animate news-card" style="transition-delay: 0.3s;">
                     <div class="news-card-image-placeholder"></div>
@@ -217,7 +245,7 @@
                         <h3 class="news-card-title font-chinese">MorphusAI 參與全球 AI 峰會</h3>
                         <p class="news-card-excerpt font-chinese">我們的 CEO 將在峰會上發表演講，分享對 AI 未來的洞見...</p>
                     </div>
-                    <a href="#" class="news-card-readmore">閱讀更多 &rarr;</a>
+                    <a href="#" class="news-card-readmore hover:text-teal-700 transition-colors">閱讀更多 &rarr;</a>
                 </div>
             </div>
         </div>
@@ -300,7 +328,7 @@
                 <h2 class="text-3xl sm:text-4xl font-bold text-neutral-800 mb-20 section-title center">Ready to Get Started?</h2> <p class="text-lg text-neutral-600 mb-10 font-chinese">
                     聯繫我們的專家團隊，了解 MorphusAI 如何為您的業務帶來革命性的轉型。我們期待與您一同探索 AI 的無限可能。
                 </p>
-                <a href="mailto:contact@morphusai.com" class="btn-soft text-lg">Contact Us</a>
+                <a href="mailto:contact@morphusai.com" class="btn-soft text-lg hover:text-teal-700 transition-colors">Contact Us</a>
             </div>
         </div>
     </section>
@@ -328,8 +356,8 @@
                 <div class="md:col-span-1 text-center md:text-left">
                      <h4 class="text-lg font-semibold text-neutral-700 mb-4">Our Projects</h4>
                     <div class="space-y-3">
-                        <a href="https://johnny7861532.github.io/AI_Vtuber/" target="_blank" rel="noopener noreferrer" class="footer-btn-outline">Project Echo</a>
-                        <a href="https://pale-fable-round.figma.site/" target="_blank" rel="noopener noreferrer" class="footer-btn-outline">KEMEKO</a>
+                        <a href="https://johnny7861532.github.io/AI_Vtuber/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-700 transition-colors">Project Echo</a>
+                        <a href="https://pale-fable-round.figma.site/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-700 transition-colors">KEMEKO</a>
                     </div>
                 </div>
             </div>
@@ -383,6 +411,54 @@
                     // Add language switching logic here in the future
                     alert('語言切換功能待開發！');
                 });
+            }
+
+            // HERO headline scramble‑to‑reveal animation
+            const heroLine1 = document.getElementById('hero-line1');
+            const heroLine2 = document.getElementById('hero-line2');
+
+            if (heroLine1 && heroLine2) {
+                const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+                const scramble = (el, finalText, frame = 25, step = 2) => {
+                    let iteration = 0;
+                    const len = finalText.length;
+
+                    const interval = setInterval(() => {
+                        let display = '';
+                        for (let i = 0; i < len; i++) {
+                            display += i < iteration
+                                ? finalText[i]
+                                : letters[Math.floor(Math.random() * letters.length)];
+                        }
+                        el.textContent = display;
+                        iteration += step;   // reveal `step` characters each tick for faster animation
+                        if (iteration >= len) {
+                            clearInterval(interval);
+                            el.textContent = finalText; // lock‑in final text
+                        }
+                    }, frame);
+                };
+
+                // Cache originals, then seed with random glyphs of equal length
+                const original1 = heroLine1.textContent;
+                const original2 = heroLine2.textContent;
+
+                const randomizeText = text =>
+                    Array.from(text).map(ch =>
+                        /\s/.test(ch) ? ch : letters[Math.floor(Math.random() * letters.length)]
+                    ).join('');
+
+                heroLine1.textContent = randomizeText(original1);
+                heroLine2.textContent = randomizeText(original2);
+
+                // Start first line
+                setTimeout(() => {
+                    scramble(heroLine1, original1);        // uses default frame = 25 ms
+                    // Kick off second line when the first line is about halfway done
+                    const delay = Math.ceil((original1.length / 2) * 25); // half the first‑line duration
+                    setTimeout(() => scramble(heroLine2, original2), delay);
+                }, 100); // slight initial delay
             }
         });
         
