@@ -334,10 +334,10 @@
     </section>
 
     <section id="contact" class="section-padding bg-stone-50">
-        <div class="container mx-auto text-center">
+        <div data-scroll data-scroll-speed="1" class="container mx-auto text-center">
             <div class="scroll-animate max-w-xl mx-auto">
-                <h2 data-scroll data-scroll-speed="1" class="text-3xl sm:text-4xl font-bold text-neutral-800 mb-20 section-title center">Ready to Get Started?</h2>
-                <p data-scroll data-scroll-speed="1" class="text-lg text-neutral-600 mb-10 font-chinese">
+                <h2 class="text-3xl sm:text-4xl font-bold text-neutral-800 mb-20 section-title center">Ready to Get Started?</h2>
+                <p class="text-lg text-neutral-600 mb-10 font-chinese">
                     聯繫我們的專家團隊，了解 MorphusAI 如何為您的業務帶來革命性的轉型。我們期待與您一同探索 AI 的無限可能。
                 </p>
                 <a href="mailto:contact@morphusai.com" class="btn-soft text-lg hover:text-teal-700 transition-colors">Contact Us</a>
@@ -368,15 +368,19 @@
                 </div>
 
                 <div class="md:col-span-1 text-center md:text-left">
-                     <h4 class="text-lg font-semibold text-neutral-700 mb-4">Our Projects</h4>
-                    <div class="space-y-3">
-                        <a href="https://johnny7861532.github.io/AI_Vtuber/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-700 transition-colors">Project Echo</a>
-                        <a href="https://pale-fable-round.figma.site/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-700 transition-colors">KEMEKO</a>
-                    </div>
+                    <h4 class="text-lg font-semibold text-neutral-700 mb-4">Our Projects</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="https://echo.morphusai.com/" target="_blank" rel="noopener" class="hover:text-teal-700 transition-colors">Project Echo</a>
+                        </li>
+                        <li>
+                            <a href="https://pale-fable-round.figma.site/" target="_blank" rel="noopener" class="hover:text-teal-700 transition-colors">KEMEKO</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="mt-12 border-t border-neutral-300 pt-8 text-center">
-                <p class="text-sm">&copy; 2025 MorphusAI. All rights reserved.</p>
+                <p class="text-sm mb-10">&copy; 2025 MorphusAI. All rights reserved.</p>
             </div>
             </div>
     </footer>
@@ -489,6 +493,22 @@
                     const delay = Math.ceil((original1.length / 2) * 25); // half the first‑line duration
                     setTimeout(() => scramble(heroLine2, original2), delay);
                 }, 100); // slight initial delay
+            }
+        });
+        // Re‑calculate LocomotiveScroll height after all assets load and again after a short delay
+        window.addEventListener('load', () => {
+            if (locoScroll && typeof locoScroll.update === 'function') {
+                locoScroll.update();
+
+                // Some embeds (e.g., YouTube iframe) report size later; update again after 1 s
+                setTimeout(() => locoScroll.update(), 1000);
+            }
+        });
+
+        // Also update on window resize, in case the viewport size changes
+        window.addEventListener('resize', () => {
+            if (locoScroll && typeof locoScroll.update === 'function') {
+                locoScroll.update();
             }
         });
         
