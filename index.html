@@ -110,6 +110,25 @@
             @apply w-full mt-2 px-3 py-2 border border-teal-600 text-teal-700 rounded-md text-sm hover:bg-teal-50 transition-colors focus:outline-none;
         }
 
+        /* ——— Subtle floating noise dots ——— */
+        #scroll-container { position: relative; }      /* anchor for absolute overlay */
+        #floating-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 200vh;       /* cover at least twice the viewport */
+            pointer-events: none;
+            z-index: 40;             /* overlay main content but below sticky header */
+        }
+        .floating-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(0,0,0,0.1); /* subtle gray */
+            border-radius: 50%;
+            will-change: transform;
+        }
     </style>
 </head>
 <body class="bg-white text-neutral-700 leading-relaxed">
@@ -165,6 +184,7 @@
 
     <!-- Smooth‑scroll container -->
     <div id="scroll-container" data-scroll-container>
+        <div id="floating-dots" data-scroll aria-hidden="true"></div>
 
     <section class="bg-white section-padding min-h-screen flex items-center">
         <div class="container mx-auto text-center">
@@ -202,27 +222,7 @@
         </div>
     </section>
 
-    <section id="about" class="section-padding bg-stone-50">
-        <div data-scroll data-scroll-speed="1" class="container mx-auto">
-            <div class="scroll-animate text-center mb-28">
-                <h2 class="sm:text-4xl font-bold text-neutral-800 section-title center">About Us</h2>
-                <p class="text-neutral-500 mt-4 text-lg font-chinese">我們的使命與願景</p>
-        </div>
-        <!-- Company Banner Image -->
-        <div data-scroll data-scroll-speed="1" class="scroll-animate max-w-4xl mx-auto mb-16">
-            <img src="images/DSC_6061.jpg"
-                 alt="MorphusAI Team Photo"
-                 class="w-full aspect-video object-cover rounded-lg shadow-lg">
-        </div>
-        <div data-scroll data-scroll-speed="1" class="scroll-animate max-w-3xl mx-auto text-center text-neutral-600 text-lg leading-relaxed font-chinese">
-                <p>
-                    MorphusAI 致力於開發尖端的人工智能解決方案，旨在賦能企業與個人，釋放數據的全部潛力。我們相信，透過創新技術，可以簡化複雜挑戰，創造更智能、更高效的世界。我們的團隊由充滿熱情的AI專家、數據科學家和工程師組成，共同致力於推動AI技術的邊界。
-                </p>
-        </div>
-        </div>
-    </section>
-
-    <section id="news" class="section-padding bg-white">
+    <section id="news" class="section-padding bg-stone-50">
         <div class="container mx-auto">
             <div class="scroll-animate text-center mb-28">
                 <h2 data-scroll data-scroll-speed="1" class="text-3xl sm:text-4xl font-bold text-neutral-800 section-title center">Latest News</h2>
@@ -257,6 +257,26 @@
                     <a href="#" class="news-card-readmore hover:text-teal-700 transition-colors">閱讀更多 &rarr;</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding bg-white">
+        <div data-scroll data-scroll-speed="1" class="container mx-auto">
+            <div class="scroll-animate text-center mb-28">
+                <h2 class="sm:text-4xl font-bold text-neutral-800 section-title center">About Us</h2>
+                <p class="text-neutral-500 mt-4 text-lg font-chinese">我們的使命與願景</p>
+        </div>
+        <!-- Company Banner Image -->
+        <div data-scroll data-scroll-speed="1" class="scroll-animate max-w-4xl mx-auto mb-16">
+            <img src="images/DSC_6061.jpg"
+                 alt="MorphusAI Team Photo"
+                 class="w-full aspect-video object-cover rounded-lg shadow-lg">
+        </div>
+        <div data-scroll data-scroll-speed="1" class="scroll-animate max-w-3xl mx-auto text-center text-neutral-600 text-lg leading-relaxed font-chinese">
+                <p>
+                    MorphusAI 致力於開發尖端的人工智能解決方案，旨在賦能企業與個人，釋放數據的全部潛力。我們相信，透過創新技術，可以簡化複雜挑戰，創造更智能、更高效的世界。我們的團隊由充滿熱情的AI專家、數據科學家和工程師組成，共同致力於推動AI技術的邊界。
+                </p>
+        </div>
         </div>
     </section>
 
@@ -424,6 +444,26 @@
                 smartphone: { smooth: true },
                 tablet: { smooth: true }
             });
+
+            // ------- create floating noise dots -------
+            const dotsContainer = document.getElementById('floating-dots');
+            if (dotsContainer) {
+                const totalDots = 160;   // adjust quantity here
+                const bodyHeight = document.documentElement.scrollHeight || 5000;
+
+                for (let i = 0; i < totalDots; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'floating-dot';
+                    dot.style.left = `${Math.random() * 100}%`;
+                    dot.style.top  = `${Math.random() * bodyHeight}px`;
+
+                    const speed = (Math.random() * 2 - 1).toFixed(2); // -1 to +1
+                    dot.setAttribute('data-scroll', '');
+                    dot.setAttribute('data-scroll-speed', speed);
+
+                    dotsContainer.appendChild(dot);
+                }
+            }
 
             // now that locoScroll exists, hook the scroll event
             locoScroll.on('scroll', () => {
