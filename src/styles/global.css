@@ -33,7 +33,7 @@ body {
 }
 
 .btn-soft {
-  @apply px-8 py-3 text-teal-700 rounded-lg shadow-sm hover:text-teal-800 transition-colors duration-300;
+  @apply px-8 py-3 text-teal-700 rounded-lg hover:text-teal-800 transition-colors duration-300;
 }
 .btn-outline-soft {
   @apply px-8 py-3 border border-teal-600 text-teal-700 rounded-lg shadow-sm hover:bg-teal-50 hover:shadow-md transition-all duration-300;
