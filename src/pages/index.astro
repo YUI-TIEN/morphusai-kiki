@@ -8,13 +8,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Page loading spinner -->
     <div id="preloader" aria-hidden="true">
-      <img src="/images/Logo-Icon-Black.svg" alt="MorphusAI Logo icon" class="preloader-logo">
+      <img src="{import.meta.env.BASE_URL + 'images/Logo-Icon-Black.svg'}" alt="MorphusAI Logo icon" class="preloader-logo">
   </div>
 
   <header class="sticky top-0 z-50 bg-white/90 shadow-sm">
       <div class="container mx-auto px-6 py-3 flex justify-between items-center">
           <a href="#" class="block">
-              <img src="/images/Logo-EN-Black.png" alt="MorphusAI Logo" class="h-8 w-auto">
+              <img src="{import.meta.env.BASE_URL + 'images/Logo-EN-Black.png'}" alt="MorphusAI Logo" class="h-8 w-auto">
           </a>
           <nav class="hidden md:flex space-x-10 main-nav items-center"> 
               <a href="#about" class="text-neutral-600 hover:text-teal-700 transition-colors text-center">
@@ -151,7 +151,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
       <!-- Company Banner Image -->
       <div data-scroll data-scroll-speed="1" class="scroll-animate max-w-4xl mx-auto mb-16">
-          <img src="/images/DSC_6061.jpg"
+          <img src="{import.meta.env.BASE_URL + 'images/DSC_6061.jpg'}"
                alt="MorphusAI Team Photo"
                class="w-full aspect-video object-cover rounded-lg shadow-lg">
       </div>
@@ -254,7 +254,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="grid md:grid-cols-3 gap-8 items-start mb-12">
               <div class="md:col-span-1 flex flex-col items-center text-center">
                   <a href="#" class="block mb-4">
-                      <img src="/images/Logo-EN-Black.png" alt="MorphusAI Logo" class="h-12 w-auto mx-auto md:mx-0">
+                      <img src="{import.meta.env.BASE_URL + 'images/Logo-EN-Black.png'}" alt="MorphusAI Logo" class="h-12 w-auto mx-auto md:mx-0">
                   </a>
                   <div class="mt-2">
                        <p class="text-sm font-chinese">Contact Us 或致電</p>
