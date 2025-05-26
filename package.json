@@ -15,7 +15,8 @@
   "description": "",
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
-    "astro": "^5.8.0"
+    "astro": "^5.8.0",
+    "locomotive-scroll": "^4.1.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

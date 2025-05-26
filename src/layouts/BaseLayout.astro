@@ -16,8 +16,90 @@ import "../styles/global.css";
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
 </head>
 <body class="bg-white text-neutral-700 leading-relaxed">
+  <div id="mouse-follower" class="mouse-follower"></div>
   <slot />
   <!-- Locomotive Scroll JS -->
   <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js" defer></script>
+  <script>
+    // 鼠標跟隨漸層模糊圓圈的 JavaScript
+    document.addEventListener('DOMContentLoaded', () => {
+      const mouseFollower = document.getElementById('mouse-follower');
+
+      if (mouseFollower) {
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let defaultSpeed = 0.1; // 圓圈跟隨鼠標的平滑度，值越小越平滑
+        let interactiveSpeed = 0.2; // 懸停在可點擊元素上時的更快的平滑度
+        let currentSpeed = defaultSpeed;
+
+        let targetElementCenter = { x: 0, y: 0 };
+        let isHoveringInteractive = false;
+
+        function animateFollower() {
+        // 圓圈將始終跟隨實際鼠標位置，不再有磁吸效果
+        currentX += (mouseX - currentX) * currentSpeed; // 始終使用 mouseX
+        currentY += (mouseY - currentY) * currentSpeed; // 始終使用 mouseY
+
+        mouseFollower.style.left = `${currentX}px`;
+        mouseFollower.style.top = `${currentY}px`;
+
+        requestAnimationFrame(animateFollower);
+        }
+
+        // 監聽整個文檔的鼠標移動
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+          // 鼠標移動時顯示圓圈
+          if (!mouseFollower.classList.contains('active')) {
+            mouseFollower.classList.add('active');
+          }
+        });
+
+        // 鼠標離開視窗時隱藏圓圈
+        document.addEventListener('mouseleave', () => {
+          mouseFollower.classList.remove('active');
+          isHoveringInteractive = false; // 重置狀態
+          currentSpeed = defaultSpeed; // 重置速度
+        });
+
+        // 查找所有可點擊的互動元素
+        // 這個選擇器包含常見的連結、按鈕、以及帶有 cursor-pointer 類名的元素
+        const interactiveElements = document.querySelectorAll(
+          'a[href], button, input[type="button"], [onclick], [role="button"], .cursor-pointer'
+        );
+
+        interactiveElements.forEach(el => {
+          el.addEventListener('mouseover', () => {
+            isHoveringInteractive = true;
+            currentSpeed = interactiveSpeed; // 加快圓圈的吸附速度
+
+            // 計算互動元素的中心位置
+            const rect = el.getBoundingClientRect();
+            targetElementCenter.x = rect.left + rect.width / 2;
+            targetElementCenter.y = rect.top + rect.height / 2;
+
+            // 添加互動樣式類
+            mouseFollower.classList.add('mouse-follower--interactive');
+          });
+
+          el.addEventListener('mouseout', () => {
+            isHoveringInteractive = false;
+            currentSpeed = defaultSpeed; // 恢復預設速度
+            // 移除互動樣式類
+            mouseFollower.classList.remove('mouse-follower--interactive');
+          });
+        });
+
+        // 開始動畫循環
+        animateFollower();
+      } else {
+        console.warn('找不到 #mouse-follower 元素，鼠標跟隨圓圈未初始化。');
+      }
+    });
+  </script>
 </body>
 </html>
