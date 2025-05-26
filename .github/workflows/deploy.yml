@@ -1,35 +1,45 @@
-name: Deploy Astro to GitHub Pages
+# .github/workflows/deploy.yml (或你的工作流程檔案名稱)
+
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main # 當 'main' 分支有新的推送時觸發
+      # - master # 如果你的主要分支是 master，則改為 master
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
+    # 新增或修改此區塊，給予寫入權限
+    permissions:
+      contents: write # 允許寫入儲存庫內容
+      pages: write   # 允許寫入 Pages (通常用於新的 GitHub Pages 功能)
+      id-token: write # 如果你有設定 OIDC，這也是需要的
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '20' # 或你專案使用的 Node.js 版本
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Build site
+      - name: Build Astro project
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          publish_dir: ./dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # 你的 Astro 建置輸出的資料夾
+          # 如果你的 Astro 設定了 base 路徑，並且希望 gh-pages 在子路徑下部署，
+          # 確保你的 astro.config.mjs 中的 base 設定正確。
+          # 如果你的 GitHub Pages URL 是 '你的使用者名稱.github.io/你的專案名稱/'
+          # 則 publish_branch 預設就是 gh-pages，不需要特別設定。
+          # publish_branch: gh-pages # 通常 peaceiris/actions-gh-pages 預設就是 gh-pages 分支
