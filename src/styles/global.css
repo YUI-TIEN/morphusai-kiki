@@ -151,20 +151,20 @@ nav.main-nav a .nav-chinese {
   width: 150px; /* 圓圈大小 */
   height: 150px; /* 圓圈大小 */
   border-radius: 50%; /* 使其成為圓形 */
-  /* 初始漸層色，參考您的紫色和藍色 */
+  /* 初始漸層色，參考您的紫色和藍色 - 透明度再次降低 */
   background: radial-gradient(circle at center, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.05) 70%, rgba(0,0,0,0) 100%);
   filter: blur(40px); /* 模糊效果 */
   pointer-events: none; /* 確保它不會阻擋鼠標事件 */
   transform: translate(-50%, -50%); /* 將圓圈中心定位在鼠標位置 */
   z-index: 9999; /* 確保它在最上層 */
   opacity: 0; /* 初始隱藏 */
-  /* === 關鍵修改：更全面的 transition 設定 === */
-  /* 讓所有會變化的屬性都有平滑過渡 */
-  transition: opacity 1s ease-in-out,
-              background 1s ease-in-out, /* 顏色過渡可以稍微長一點 */
-              width 1s ease-in-out,
-              height 1s ease-in-out,
-              filter 1s ease-in-out; /* 模糊度過渡 */
+  /* === 關鍵修改：更精確的 transition 設定 === */
+  /* 僅對會變化的屬性應用過渡，並確保時間和平滑度 */
+  transition: opacity 0.3s ease-out,       /* 整體顯示隱藏 */
+              width 0.3s ease-out,         /* 大小變化 */
+              height 0.3s ease-out,        /* 大小變化 */
+              filter 0.3s ease-out;        /* 模糊度變化 */
+  /* 由於顏色不變，background 屬性不再需要 transition */
 }
 
 .mouse-follower.active {
@@ -173,8 +173,7 @@ nav.main-nav a .nav-chinese {
 
 /* 鼠標懸停在可點擊元素上時的樣式 */
 .mouse-follower--interactive {
-  /* 更實心的漸層，顏色更飽和 */
-  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.05) 70%, rgba(0,0,0,0) 100%);
+  /* 不再改變顏色 (因此移除了 background 屬性) */
   width: 100px; /* 變小一點 */
   height: 100px;
   filter: blur(25px); /* 稍微不那麼模糊 */
